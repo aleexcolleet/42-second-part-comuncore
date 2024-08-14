@@ -1,2 +1,1 @@
-# 42-second-part-comuncore
-On this repo I'll keep second circle projects: 1.fractol, minitalk and push_swap
+Here I'll keep the second circle projects: 1.fractol, 2.push_swap and 3.minitalk.
