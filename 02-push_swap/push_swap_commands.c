@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_commands.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acollet- <acollet-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 12:47:52 by acollet-          #+#    #+#             */
+/*   Updated: 2024/03/07 12:47:53 by acollet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 //remember that sending double pointer is to modify the stacks
-static void	rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheapest_node)
+static void	rotate_both(t_stack_node **a,
+						t_stack_node **b,
+						t_stack_node *cheapest_node)
 {
 	while (*a != cheapest_node->target_node && *b != cheapest_node)
 		rr(a, b, false);
@@ -12,7 +26,9 @@ static void	rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheape
 	set_current_position(*b);
 }
 
-static void	reverse_rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheapest_node)
+static void	reverse_rotate_both(t_stack_node **a,
+								t_stack_node **b,
+								t_stack_node *cheapest_node)
 {
 	while (*a != cheapest_node->target_node && *b != cheapest_node)
 		rrr(a, b, false);
@@ -20,7 +36,9 @@ static void	reverse_rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node
 	set_current_position(*b);
 }
 
-void	finish_rotation(t_stack_node **stack, t_stack_node *top_node, char stack_name)
+void	finish_rotation(t_stack_node **stack,
+							t_stack_node *top_node,
+							char stack_name)
 {
 	while (*stack != top_node)
 	{
@@ -43,14 +61,16 @@ void	finish_rotation(t_stack_node **stack, t_stack_node *top_node, char stack_na
 
 static void	move_nodes(t_stack_node **a, t_stack_node **b)
 {
-	t_stack_node *cheapest_node;
+	t_stack_node	*cheapest_node;
 
 	cheapest_node = return_cheapest(*b);
-	if (cheapest_node->above_median && cheapest_node->target_node->above_median)
+	if (cheapest_node->above_median
+		&& cheapest_node->target_node->above_median)
 		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->above_median) && !(cheapest_node->target_node->above_median))
+	else if (!(cheapest_node->above_median)
+		&& !(cheapest_node->target_node->above_median))
 		reverse_rotate_both(a, b, cheapest_node);
-	finish_rotation(b, cheapest_node, 'b'); //in case they're not correctly rotated
+	finish_rotation(b, cheapest_node, 'b');
 	finish_rotation(a, cheapest_node->target_node, 'a');
 	pa(a, b, false);
 }
@@ -58,7 +78,7 @@ static void	move_nodes(t_stack_node **a, t_stack_node **b)
 void	push_swap(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*smallest;
-	int						len_a;
+	int				len_a;
 
 	len_a = stack_len(*a);
 	if (len_a == 5)
@@ -69,7 +89,7 @@ void	push_swap(t_stack_node **a, t_stack_node **b)
 			pb(b, a, false);
 	}
 	tiny_sort(a);
-	while (*b) //init node each time to refresh
+	while (*b)
 	{
 		init_nodes(*a, *b);
 		move_nodes(a, b);

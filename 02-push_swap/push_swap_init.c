@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_init.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acollet- <acollet-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 12:47:57 by acollet-          #+#    #+#             */
+/*   Updated: 2024/03/07 12:47:58 by acollet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <limits.h>
 #include <stdbool.h>
@@ -26,35 +38,35 @@ void	set_current_position(t_stack_node *stack)
 
 static void	set_target_node(t_stack_node *a, t_stack_node *b)
 {
-	t_stack_node *current_a;
-	t_stack_node *target_node;
-	long	best_match_index;
-	
+	t_stack_node	*current_a;
+	t_stack_node	*target_node;
+	long			best_match_index;
+
 	while (b)
 	{
 		best_match_index = LONG_MAX;
 		current_a = a;
 		while (current_a)
 		{
-			if (current_a->value > b->value && current_a->value < best_match_index) //aqui busca el mayor menor.
+			if (current_a->value > b->value
+				&& current_a->value < best_match_index)
 			{
 				best_match_index = current_a->value;
 				target_node = current_a;
 			}
 			current_a = current_a->next;
 		}
-	if (LONG_MAX == best_match_index) //en caso de no encontrar uno adecaudo. Buscamos el nodo mas pequeno para adherir el mas grande detras de este.
-		b->target_node = find_smallest(a);
-	else
-		b->target_node = target_node;
-	b = b->next;
+		if (LONG_MAX == best_match_index)
+			b->target_node = find_smallest(a);
+		else
+			b->target_node = target_node;
+		b = b->next;
 	}
 }
 
-//here we calculate the cost of topping both nodes (a and b) so that I can then push it.
 void	set_price(t_stack_node *a, t_stack_node *b)
 {
-	int len_a;
+	int	len_a;
 	int	len_b;
 
 	len_a = stack_len(a);
@@ -74,7 +86,7 @@ void	set_price(t_stack_node *a, t_stack_node *b)
 
 void	set_cheapest(t_stack_node *b)
 {
-	long	best_match_value;
+	long			best_match_value;
 	t_stack_node	*best_match_node;
 
 	if (b == NULL)
@@ -92,7 +104,6 @@ void	set_cheapest(t_stack_node *b)
 	best_match_node->cheapest = true;
 }
 
-//to refresh nodes each time
 void	init_nodes(t_stack_node *a, t_stack_node *b)
 {
 	set_current_position(a);

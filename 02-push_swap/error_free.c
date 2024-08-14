@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acollet- <acollet-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 12:47:24 by acollet-          #+#    #+#             */
+/*   Updated: 2024/03/07 12:47:26 by acollet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	free_matrix(char **av)
@@ -14,8 +26,8 @@ void	free_matrix(char **av)
 
 void	free_stack(t_stack_node **stack)
 {
-	t_stack_node *tmp;
-	t_stack_node *current;
+	t_stack_node	*tmp;
+	t_stack_node	*current;
 
 	if (!stack)
 		return ;

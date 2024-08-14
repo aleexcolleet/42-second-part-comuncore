@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acollet- <acollet-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 12:47:34 by acollet-          #+#    #+#             */
+/*   Updated: 2024/03/07 12:47:35 by acollet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 //general fucntion to push higher nodes betwen lists
 
 static void	push(t_stack_node **dest, t_stack_node **src)
 {
-	t_stack_node *node_to_push;
+	t_stack_node	*node_to_push;
 
 	if (*src == NULL)
 		return ;
